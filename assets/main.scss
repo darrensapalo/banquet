@@ -1,0 +1,11 @@
+.form {
+  background-color: #3b8070;
+  &-contact-tracing {
+    margin: 0 20px;
+    width: 100%;
+  }
+
+  &-field {
+    padding: 10px;
+  }
+}
