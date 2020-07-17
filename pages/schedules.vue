@@ -10,6 +10,13 @@
 </template>
 <script>
   export default {
+
+      head() {
+          return {
+              title: "Mass Schedules",
+              meta: []
+          }
+      },
       async asyncData({ $content }) {
           const page = await $content('schedules').fetch()
 
