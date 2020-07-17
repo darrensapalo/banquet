@@ -21,6 +21,8 @@
           <v-form ref="form" class="form-contact-tracing">
             <v-text-field v-model="formData.name" class="form-field" required label="Mass Attendee's Name">
             </v-text-field>
+            <v-text-field type="number" v-model="formData.seat" class="form-field" required label="Designated Seat">
+            </v-text-field>
             <v-text-field v-model="formData.contactNumber" class="form-field" required label="Contact Number">
             </v-text-field>
             <v-textarea v-model="formData.address" class="form-field" required label="Address">
@@ -57,6 +59,7 @@ export default {
       return {
           formData: {
               name: "",
+              seat: "",
               address: "",
               contactNumber: ""
           }
