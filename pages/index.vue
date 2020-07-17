@@ -62,6 +62,12 @@ export default {
           }
       }
     },
+    head() {
+        return {
+            title: "Attendance Checker",
+            meta: []
+        }
+    },
     methods: {
       submit() {
           console.log("Hello world");
