@@ -8,37 +8,22 @@
       xs12
       sm8
       md6
+      class="full-space"
     >
-      <v-card>
+      <v-card class="full-space">
         <v-card-title class="headline">
-          Attendance Sheet
+          Choose Contact Tracing Method
         </v-card-title>
-        <v-card-text>
-          <p>This attendance sheet is intended for recording for <strong>July 19, 2020, Sunday</strong> for the time slot <strong>5:00 PM</strong>.</p>
-        </v-card-text>
         <v-row align="center">
-          <v-form ref="form" class="form-contact-tracing">
-            <v-text-field v-model="formData.name" class="form-field" required label="Mass Attendee's Name" />
-            <v-text-field v-model="formData.seat" type="number" class="form-field" required label="Designated Seat" />
-            <v-text-field v-model="formData.contactNumber" class="form-field" required label="Contact Number" />
-            <v-textarea v-model="formData.address" class="form-field" required label="Address" />
-            <v-card-actions>
-              <v-spacer />
-              <v-btn
-                nuxt
-                to="/records"
-              >
-                View records
-              </v-btn>
-              <v-btn
-                color="primary"
-                nuxt
-                @click="submit()"
-              >
-                Submit
-              </v-btn>
-            </v-card-actions>
-          </v-form>
+          <v-col class="trace-option__container">
+            <v-btn class="trace-option" height="6rem" to="trace/qr">
+              QR Code Scanner
+            </v-btn>
+
+            <v-btn class="trace-option" height="6rem" to="trace">
+              ID
+            </v-btn>
+          </v-col>
         </v-row>
       </v-card>
     </v-flex>
@@ -73,3 +58,15 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+
+.trace-option {
+  margin: 10px;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+  }
+}
+</style>
