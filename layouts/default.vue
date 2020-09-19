@@ -34,7 +34,7 @@
       <v-spacer />
     </v-app-bar>
     <v-content>
-      <v-container>
+      <v-container style="height: 100%">
         <nuxt />
       </v-container>
     </v-content>
@@ -57,13 +57,13 @@ export default {
       items: [
         {
           icon: 'mdi-file-document-edit-outline',
-          title: 'Attendance Sheet',
+          title: 'Home',
           to: '/'
         },
         {
-            icon: 'mdi-file-table-box-outline',
-            title: 'Attendance Records',
-            to: '/records'
+          icon: 'mdi-file-table-box-outline',
+          title: 'Attendance Records',
+          to: '/records'
         },
         {
           icon: 'mdi-folder-clock-outline',

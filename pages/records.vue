@@ -1,78 +1,76 @@
 <template>
   <v-data-table
-      :headers="headers"
-      :items="attendees"
-      :items-per-page="5"
-      :must-sort="true"
-      sort-by="unix"
-      class="elevation-1"
-  ></v-data-table>
+    :headers="headers"
+    :items="attendees"
+    :items-per-page="5"
+    :must-sort="true"
+    sort-by="unix"
+    class="elevation-1"
+  />
 </template>
 <script>
-  import moment from 'moment';
-  export default {
+import moment from 'moment'
+export default {
+  data () {
+    return {
+      headers: [
+        {
+          text: 'Time slot',
+          align: 'start',
+          sortable: false,
+          value: 'timeslot'
+        },
+        {
+          text: 'Person',
+          value: 'name',
+          sortable: false
+        }
+        // {
+        //   text: 'Seat',
+        //   value: 'seat',
+        //   sortable: false
+        // }
+      ],
+      attendees: [
 
-      data() {
-          return {
-              headers: [
-                  {
-                    text: "Time slot",
-                    sortable: true,
-                    value: 'unix',
-                    sort: (a, b) => { return a - b; },
-                  },
-                  {
-                      text: "Time slot",
-                      align: 'start',
-                      sortable: false,
-                      value: 'timeslot'
-                  },
-                  {
-                      text: "Name",
-                      value: 'name',
-                      sortable: false
-                  },
-                  {
-                      text: "Seat",
-                      value: 'seat',
-                      sortable: false
-                  }
-              ],
-              attendees: [
-                  {
-                      timeslot: '2020-07-19T00:00:00Z',
-                      name: 'Darren Sapalo',
-                      seat: '1'
-                  },
-                  {
-                      timeslot: '2020-07-19T00:00:00Z',
-                      name: 'Verma Abanilla',
-                      seat: '2'
-                  },
-                  {
-                      timeslot: '2020-07-20T00:00:00Z',
-                      name: 'John Smith',
-                      seat: '3'
-                  },
-                  {
-                      timeslot: '2020-07-21T00:00:00Z',
-                      name: 'Jane Smith',
-                      seat: '4'
-                  }
-              ]
-                .map((elem) => ({
-                    ...elem,
-                    unix: moment(elem.timeslot).unix(),
-                    timeslot: moment(elem.timeslot).format("dddd, MMMM Do YYYY, h:mm:ss a")
-                }))
-          }
-      },
+      ]
+    }
+  },
+  computed: {
 
-      head() {
-          return {
-              title: "Records",
-              meta: []
-          }
-      },
+    baseUrl () {
+    //   return 'http://localhost:2000'
+      return 'https://asia-southeast2-olfp-makati.cloudfunctions.net/contactTrace'
+    }
+  },
+
+  mounted () {
+    this.loadData()
+  },
+  methods: {
+    async loadData () {
+      const requestUrl = this.baseUrl
+    
+      const response = await fetch(requestUrl)
+      console.log(response)
+
+      const rows = await response.json()
+      console.log('Got rows' + rows.length)
+    
+      const responses = rows.map(row => ({
+        timeslot: row.created_at,
+        name: row.user_id
+      }))
+
+      this.attendees = responses
+    }
+  },
+
+  head () {
+    return {
+      title: 'Records',
+      meta: []
+    }
   }
+}
 </script>
