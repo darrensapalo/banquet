@@ -24,7 +24,7 @@
           <v-col>
             <v-row align="center">
               <v-form ref="form" class="form-contact-tracing" @submit="review">
-                <v-text-field v-model="formData.id" class="form-field" required label="ID" />
+                <v-text-field ref="idField" v-model="formData.id" class="form-field" required label="ID" />
                 <div v-if="userPreview !== null" class="user-preview">
                   <v-card-subtitle class="headline">
                     User Preview
@@ -83,6 +83,10 @@ export default {
       enabled: false
     }
   },
+  mounted () {
+    const idField = this.$refs.idField
+    idField.focus()
+  },
   methods: {
     review (evt) {
       if (evt) {
@@ -91,9 +95,6 @@ export default {
       console.log('Review')
 
       this.$router.push('/trace/' + this.formData.id)
-    },
-    trace () {
-      console.log('Trace')
     }
   },
   head () {

@@ -58,11 +58,6 @@ export default {
         {
           icon: 'mdi-file-document-edit-outline',
           title: 'Home',
-          to: '/select-method'
-        },
-        {
-          icon: 'mdi-file-document-edit-outline',
-          title: 'Attendance Sheet',
           to: '/'
         },
         {

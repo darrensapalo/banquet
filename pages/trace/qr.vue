@@ -48,7 +48,7 @@ export default {
 
       setTimeout(() => {
         this.$router.push('/trace/' + decodedString)
-      }, 3000)
+      }, 250)
     }
   },
   head () {
