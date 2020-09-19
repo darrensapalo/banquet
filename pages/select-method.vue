@@ -3,7 +3,6 @@
     column
     justify-center
     align-center
-    class="full-space"
   >
     <v-flex
       xs12
@@ -21,7 +20,7 @@
               QR Code Scanner
             </v-btn>
 
-            <v-btn class="trace-option" height="6rem" to="trace/id">
+            <v-btn class="trace-option" height="6rem" to="trace">
               ID
             </v-btn>
           </v-col>

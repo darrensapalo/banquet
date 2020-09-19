@@ -3,26 +3,26 @@
     column
     justify-center
     align-center
-    style="height: 100%"
   >
     <v-flex
       xs12
       sm8
       md6
+      class="full-space"
     >
-      <v-card style="height: 100%">
+      <v-card class="full-space">
         <v-card-title class="headline">
-          Choose Contact Tracing Method
+          Contact Tracing by QR
         </v-card-title>
+        <v-card-text>
+          Please scan the mass attendee's QR code.
+        </v-card-text>
+        <v-alert v-if="detected" elevation="3" type="success" style="margin: 0 10px; color: white;">
+          Successfully detected QR code
+        </v-alert>
         <v-row align="center">
           <v-col class="trace-option__container">
-            <v-btn class="trace-option" height="6rem">
-              QR Code Scanner
-            </v-btn>
-
-            <v-btn class="trace-option" height="6rem">
-              ID
-            </v-btn>
+            <qrcode-stream @decode="onDecode" />
           </v-col>
         </v-row>
       </v-card>
@@ -31,23 +31,24 @@
 </template>
 
 <script>
-
+import { QrcodeStream } from 'vue-qrcode-reader'
 export default {
   components: {
+    QrcodeStream
   },
   data () {
     return {
-      formData: {
-        name: '',
-        seat: '',
-        address: '',
-        contactNumber: ''
-      }
+      detected: false
     }
   },
   methods: {
-    submit () {
-      console.log('Hello world')
+    onDecode (decodedString) {
+      console.log('Detected: ' + decodedString)
+      this.detected = true
+
+      setTimeout(() => {
+        this.$router.push('/trace/' + decodedString)
+      }, 3000)
     }
   },
   head () {

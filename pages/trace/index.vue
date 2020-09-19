@@ -3,7 +3,6 @@
     column
     justify-center
     align-center
-    class="full-space"
   >
     <v-flex
       xs12
@@ -24,8 +23,8 @@
         <v-row align="center">
           <v-col>
             <v-row align="center">
-              <v-form ref="form" class="form-contact-tracing">
-                <v-text-field v-model="formData.id" class="form-field" required label="ID"  />
+              <v-form ref="form" class="form-contact-tracing" @submit="review">
+                <v-text-field v-model="formData.id" class="form-field" required label="ID" />
                 <div v-if="userPreview !== null" class="user-preview">
                   <v-card-subtitle class="headline">
                     User Preview
@@ -53,20 +52,12 @@
                 </div>
                 <v-card-actions class="bottom-actions">
                   <v-btn
+                    :disabled="formData.id === ''"
                     nuxt
                     height="6rem"
                     @click="review()"
                   >
                     Review
-                  </v-btn>
-                  <v-btn
-                    color="primary"
-                    nuxt
-                    :disabled="!enabled"
-                    height="6rem"
-                    @click="trace()"
-                  >
-                    Trace
                   </v-btn>
                 </v-card-actions>
               </v-form>
@@ -93,16 +84,13 @@ export default {
     }
   },
   methods: {
-    review () {
+    review (evt) {
+      if (evt) {
+        evt.preventDefault()
+      }
       console.log('Review')
 
-      this.userPreview = {
-        name: 'Darren Sapalo',
-        address: 'Makati',
-        mobileNumber: '09171234567'
-      }
-
-      this.enabled = true
+      this.$router.push('/trace/' + this.formData.id)
     },
     trace () {
       console.log('Trace')
@@ -129,12 +117,11 @@ export default {
 }
 
 .bottom-actions {
-  position: absolute;
   bottom: 0;
   right: 0;
   left: 0;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   padding: 10px;
 
 }
