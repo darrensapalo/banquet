@@ -9,7 +9,6 @@
       sm8
       md6
     >
-
       <v-card>
         <v-card-title class="headline">
           Attendance Sheet
@@ -19,25 +18,22 @@
         </v-card-text>
         <v-row align="center">
           <v-form ref="form" class="form-contact-tracing">
-            <v-text-field v-model="formData.name" class="form-field" required label="Mass Attendee's Name">
-            </v-text-field>
-            <v-text-field type="number" v-model="formData.seat" class="form-field" required label="Designated Seat">
-            </v-text-field>
-            <v-text-field v-model="formData.contactNumber" class="form-field" required label="Contact Number">
-            </v-text-field>
-            <v-textarea v-model="formData.address" class="form-field" required label="Address">
-            </v-textarea>
+            <v-text-field v-model="formData.name" class="form-field" required label="Mass Attendee's Name" />
+            <v-text-field v-model="formData.seat" type="number" class="form-field" required label="Designated Seat" />
+            <v-text-field v-model="formData.contactNumber" class="form-field" required label="Contact Number" />
+            <v-textarea v-model="formData.address" class="form-field" required label="Address" />
             <v-card-actions>
               <v-spacer />
-              <v-btn nuxt
-                  to="/records"
+              <v-btn
+                nuxt
+                to="/records"
               >
                 View records
               </v-btn>
               <v-btn
-                  color="primary"
-                  nuxt
-                  @click="submit()"
+                color="primary"
+                nuxt
+                @click="submit()"
               >
                 Submit
               </v-btn>
@@ -45,7 +41,6 @@
           </v-form>
         </v-row>
       </v-card>
-
     </v-flex>
   </v-layout>
 </template>
@@ -55,26 +50,26 @@
 export default {
   components: {
   },
-    data() {
-      return {
-          formData: {
-              name: "",
-              seat: "",
-              address: "",
-              contactNumber: ""
-          }
-      }
-    },
-    head() {
-        return {
-            title: "Attendance Checker",
-            meta: []
-        }
-    },
-    methods: {
-      submit() {
-          console.log("Hello world");
+  data () {
+    return {
+      formData: {
+        name: '',
+        seat: '',
+        address: '',
+        contactNumber: ''
       }
     }
+  },
+  methods: {
+    submit () {
+      console.log('Hello world')
+    }
+  },
+  head () {
+    return {
+      title: 'Attendance Checker',
+      meta: []
+    }
+  }
 }
 </script>
