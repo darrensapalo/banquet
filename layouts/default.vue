@@ -33,11 +33,11 @@
       <v-toolbar-title v-text="title" />
       <v-spacer />
     </v-app-bar>
-    <v-content>
+    <v-main>
       <v-container style="height: 100%">
         <nuxt />
       </v-container>
-    </v-content>
+    </v-main>
     <v-footer
       :absolute="!fixed"
       app
