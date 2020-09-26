@@ -24,7 +24,7 @@
           <v-col>
             <v-row align="center">
               <v-form ref="form" class="form-contact-tracing" @submit="login">
-                <v-text-field ref="idField" v-model="password" class="form-field" required label="Password" />
+                <v-text-field ref="idField" v-model="password" type="password" class="form-field" required label="Password" />
                 <v-card-actions class="bottom-actions">
                   <v-btn
                     :disabled="password === ''"
@@ -68,7 +68,10 @@ export default {
     submit () {
 
     },
-    login () {
+    login (e) {
+      if (e) {
+        e.preventDefault()
+      }
       const MASTER_PASSWORD = 'septemberEightFatima'
 
       if (this.password === MASTER_PASSWORD) {
