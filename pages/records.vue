@@ -9,8 +9,18 @@
   />
 </template>
 <script>
-import moment from 'moment'
+
+import { mapState } from 'vuex'
+
 export default {
+  computed: {
+    ...mapState('app', ['password']),
+
+    baseUrl () {
+    //   return 'http://localhost:2000'
+      return 'https://asia-southeast2-olfp-makati.cloudfunctions.net/contactTrace'
+    }
+  },
   data () {
     return {
       headers: [
@@ -36,27 +46,23 @@ export default {
       ]
     }
   },
-  computed: {
-
-    baseUrl () {
-    //   return 'http://localhost:2000'
-      return 'https://asia-southeast2-olfp-makati.cloudfunctions.net/contactTrace'
-    }
-  },
-
   mounted () {
+    if (this.password === undefined || this.password === null || this.password === '') {
+      this.$router.push('/login')
+      return
+    }
     this.loadData()
   },
   methods: {
     async loadData () {
       const requestUrl = this.baseUrl
-    
+
       const response = await fetch(requestUrl)
       console.log(response)
 
       const rows = await response.json()
       console.log('Got rows' + rows.length)
-    
+
       const responses = rows.map(row => ({
         timeslot: row.created_at,
         name: row.user_id

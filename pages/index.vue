@@ -31,9 +31,13 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 
 export default {
   components: {
+  },
+  computed: {
+    ...mapState('app', ['password'])
   },
   data () {
     return {
@@ -43,6 +47,11 @@ export default {
         address: '',
         contactNumber: ''
       }
+    }
+  },
+  mounted () {
+    if (this.password === undefined || this.password === null || this.password === '') {
+      this.$router.push('/login')
     }
   },
   methods: {
